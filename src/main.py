@@ -17,7 +17,7 @@ matplotlib.use("Agg")
 
 def create_parser() -> argparse.ArgumentParser:
     argument_parser = argparse.ArgumentParser()
-    argument_parser.add_argument("--configuration_file", nargs="?", default="./configurations/test_configuration.json")
+    argument_parser.add_argument("--configuration_file", nargs="?", default="./configurations/40_agents_vers1.json")
     argument_parser.add_argument("--path_to_results", nargs="?", default="./result")
     argument_parser.add_argument("--create_result_graph", nargs="?", default="True")
     argument_parser.add_argument("--create_step_images", nargs="?", default="True")
@@ -59,6 +59,7 @@ def create_accuracy_graph(path_to_results: str, strategy: str):
         x_value = [value for value in result["accuracy"]]
 
     plt.plot(range(len(x_value)), x_value, label=strategy)
+    plt.legend(loc="upper right")
 
     sub_plot_diameter = figure.add_subplot(1, 3, 2)
     plt.xlabel("Step number", fontsize="xx-large")
@@ -69,6 +70,7 @@ def create_accuracy_graph(path_to_results: str, strategy: str):
         x_value = [value for value in result["diameter"]]
 
     plt.plot(range(len(x_value)), x_value, label=strategy)
+    plt.legend(loc="upper right")
 
     sub_plot_num_of_clusters = figure.add_subplot(1, 3, 3)
     plt.xlabel("Step number", fontsize="xx-large")
@@ -80,8 +82,8 @@ def create_accuracy_graph(path_to_results: str, strategy: str):
             x_value = [value for value in result["num_of_clusters"]]
 
         plt.plot(range(len(x_value)), x_value, label=strategy)
+        plt.legend(loc="upper right")
 
-    plt.legend(loc="upper right")
     plt.savefig(path_to_results + f"/accuracy.svg", transparent=False, facecolor="white", dpi=300)
 
 
